@@ -1,4 +1,4 @@
-name: repository_dispatch
+name: workflow_dispatch
 on:
   workflow_dispatch:
 jobs:
