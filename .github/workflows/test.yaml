@@ -5,7 +5,7 @@ jobs:
   job_1:
     runs-on: linux-arm64-npu-2
     container:
-      image: m.daocloud.io/quay.io/ascend/vllm-ascend:v0.9.1-dev-openeuler
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
 
     steps:
       - name: Show NPU info
