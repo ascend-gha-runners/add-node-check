@@ -4,8 +4,7 @@ on:
     types: [add-node-dispatch]
 jobs:
   job_1:
-    runs-on: linux-arm64-npu-1
-    runnerGroup: "openmerlin-guiyang-006-cluster"
+    runs-on: linux-arm64-npu-1-group
     container:
       image: m.daocloud.io/quay.io/ascend/vllm-ascend:v0.9.1-dev-openeuler
 
