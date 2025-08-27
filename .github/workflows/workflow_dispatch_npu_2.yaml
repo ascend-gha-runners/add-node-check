@@ -1,6 +1,11 @@
 name: workflow_dispatch_npu_2
 on:
   workflow_dispatch:
+  
+concurrency:
+  group: pr-test-npu-innersource-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   job_1:
     runs-on: linux-arm64-npu-1
