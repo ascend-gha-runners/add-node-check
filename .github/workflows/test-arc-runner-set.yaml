@@ -5,8 +5,7 @@ on:
 jobs:
   job_1:
     runs-on: arc-runner-set
-    container:
-      image: nginx:latest
+
 
     steps:
       - name: Show NPU info
