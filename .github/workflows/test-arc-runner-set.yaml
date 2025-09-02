@@ -11,3 +11,4 @@ jobs:
       - name: Show NPU info
         run: |
           echo "hello world"
+          sleep 3600
