@@ -15,6 +15,6 @@ jobs:
       - name: Show NPU info
         run: |
           # npu-smi info
-          sleep 3600
+          sleep 10
       - name: A step run in container
         run: echo "This step runs inside the specified container!"
