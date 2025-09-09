@@ -8,7 +8,7 @@ jobs:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
       options: --cpus 1
     services:
-      redis:
+      cann:
         image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
     
     steps:
