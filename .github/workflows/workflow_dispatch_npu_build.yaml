@@ -1,0 +1,18 @@
+name: workflow_dispatch_npu_build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: linux-arm64-npu-1
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/modelfoundry/moby/buildkit:master-rootless
+    steps: 
+    - name: oci metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+          swr.cn-southwest-2.myhuaweicloud.com/modelfoundry/${{ github.repository }}
+        tags: |
+          type=sha,event=branch
+          type=raw,value=latest,enable={{is_default_branch}}
