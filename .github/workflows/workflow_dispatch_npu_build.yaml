@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: linux-arm64-npu-1
+    runs-on: linux-amd64-cpu-1
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/modelfoundry/moby/buildkit:master-rootless
     steps: 
