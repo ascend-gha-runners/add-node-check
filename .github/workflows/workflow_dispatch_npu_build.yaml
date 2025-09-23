@@ -8,7 +8,10 @@ jobs:
       labels: linux-amd64-cpu-1
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/modelfoundry/moby/buildkit:master-rootless
-    steps: 
+    steps:
+    - name: sleep
+      run: |
+        sleep 600
     - name: oci metadata
       id: meta
       uses: docker/metadata-action@v5
