@@ -2,6 +2,7 @@ name: repository_dispatch
 on:
   repository_dispatch:
     types: [add-node-dispatch]
+  workflow_dispatch:
 jobs:
   job_1:
     runs-on:
