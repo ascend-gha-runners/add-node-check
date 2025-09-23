@@ -21,3 +21,9 @@ jobs:
         tags: |
           type=sha,event=branch
           type=raw,value=latest,enable={{is_default_branch}}
+    - name: oci build
+      uses: omniproc/buildkit-build-push-action@v1.0.0
+      with:
+          tags: ${{ steps.meta.outputs.tags }}
+          addr: 'tcp://buildkitd-service.buildkitd:1234'
+          output: 'type=image,push=false'
