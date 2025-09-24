@@ -9,9 +9,10 @@ jobs:
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/modelfoundry/moby/buildkit:master
     steps:
-    - name: sleep
-      run: |
-        sleep 10
+    - name: Checkout
+      uses: actions/checkout@v5
+      with:
+        fetch-depth: 0 # all history for all branches and tags  
     - name: oci metadata
       id: meta
       uses: docker/metadata-action@v5
@@ -21,6 +22,9 @@ jobs:
         tags: |
           type=sha,event=branch
           type=raw,value=latest,enable={{is_default_branch}}
+    - name: sleep
+      run: |
+        sleep 10
     - name: oci build
       uses: omniproc/buildkit-build-push-action@v1.0.0
       with:
