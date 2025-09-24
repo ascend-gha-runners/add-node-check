@@ -27,3 +27,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           addr: 'tcp://buildkitd-service.buildkitd:1234'
           output: 'type=image,push=false'
+          tlsdir: '/root/.docker/'
