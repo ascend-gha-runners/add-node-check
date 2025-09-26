@@ -9,9 +9,13 @@ jobs:
       group: openmerlin-guiyang-006-cluster
       labels: linux-arm64-npu-1
     container:
-      image: m.daocloud.io/quay.io/ascend/vllm-ascend:v0.9.1-dev-openeuler
+      # image: m.daocloud.io/quay.io/ascend/vllm-ascend:v0.9.1-dev-openeuler
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/sglang:main-910b
 
     steps:
       - name: Show NPU info
         run: |
           npu-smi info
+      - name: sleep
+        run: |
+          sleep 360000
