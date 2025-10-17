@@ -11,7 +11,7 @@ jobs:
       - name: Show NPU info
         run: |
           npu-smi info
-          sleep 600
+          sleep 20
 
       - name: Checkout code
         uses: actions/checkout@v4
