@@ -30,8 +30,10 @@ jobs:
       with:
           tags: ${{ steps.meta.outputs.tags }}
           addr: 'tcp://buildkitd-service.buildkitd:1234'
-          output: 'type=image,push=true'
+          output: 'type=image,push=false'
           tlsdir: '/root/.docker/'
+          opt: |
+            platform=linux/arm64,linux/amd64
           build-args: |
             APTMIRROR=repo.huaweicloud.com
   
