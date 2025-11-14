@@ -1,0 +1,12 @@
+name: workflow_dispatch_cpu_0
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: linux-amd64-cpu-0
+    steps:
+      - name: Runner Test
+        run: |
+          echo "hello world"
+          sleep 10
