@@ -33,7 +33,7 @@ jobs:
           output: 'type=image,push=false'
           tlsdir: '/root/.docker/'
           opt: |
-            platform=linux/arm64,linux/amd64
+            platform=linux/arm64
           build-args: |
             APTMIRROR=repo.huaweicloud.com
   
