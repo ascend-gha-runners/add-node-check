@@ -43,9 +43,14 @@ RUN if [ "$TARGETARCH" = "amd64" ]; then \
 WORKDIR /workspace
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update pip & apt sources
-RUN pip config set global.index-url $PIP_INDEX_URL && \
-    if [ -n "$APTMIRROR" ]; then sed -i "s|//.*.ubuntu.com|//$APTMIRROR|g" /etc/apt/sources.list; fi
+# Configure caching URLs for apt and pip
+RUN CACHING_URL="cache-service.nginx-pypi-cache.svc.cluster.local" && \
+    # Configure apt sources to use cache \
+    sed -Ei "s@(ports|archive).ubuntu.com@${CACHING_URL}:8081@g" /etc/apt/sources.list && \
+    # Configure pip to use cache \
+    pip config set global.index-url http://${CACHING_URL}/pypi/simple && \
+    pip config set global.trusted-host ${CACHING_URL}
+
 
 # Install development tools and utilities
 RUN apt-get update -y && apt upgrade -y && apt-get install -y \
@@ -69,7 +74,6 @@ RUN apt-get update -y && apt upgrade -y && apt-get install -y \
     && rm -rf /var/lib/apt/lists/* \
     && update-ca-certificates \
     && locale-gen en_US.UTF-8
-
 
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
