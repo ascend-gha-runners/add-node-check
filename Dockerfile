@@ -48,8 +48,11 @@ RUN CACHING_URL="cache-service.nginx-pypi-cache.svc.cluster.local" && \
     # Configure apt sources to use cache \
     sed -Ei "s@(ports|archive).ubuntu.com@${CACHING_URL}:8081@g" /etc/apt/sources.list && \
     # Configure pip to use cache \
-    pip config set global.index-url http://${CACHING_URL}/pypi/simple && \
     pip config set global.trusted-host ${CACHING_URL}
+
+RUN pip config --user set global.index https://mirrors.huaweicloud.com/repository/pypi
+RUN pip config --user set global.index-url https://mirrors.huaweicloud.com/repository/pypi/simple
+RUN pip config --user set global.trusted-host mirrors.huaweicloud.com
 
 
 # Install development tools and utilities
