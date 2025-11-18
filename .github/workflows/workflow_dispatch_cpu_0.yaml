@@ -6,7 +6,27 @@ jobs:
   test:
     runs-on: linux-amd64-cpu-0
     steps:
-      - name: Runner Test
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Install Rust with timing
         run: |
-          echo "hello world"
-          sleep 10
+          echo "开始安装Rust..."
+          start_time=$(date +%s.%N)
+          
+          export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+          export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+          
+          # 安装Rust并记录时间
+          curl --proto '=https' --tlsv1.2 -sSf https://mirrors.ustc.edu.cn/rust-static/rustup/rustup-init.sh | sh -s -- -y
+          
+          end_time=$(date +%s.%N)
+          elapsed_time=$(echo "$end_time - $start_time" | bc)
+          echo "Rust安装完成，耗时: ${elapsed_time}秒"
+          
+          # 验证安装
+          echo "Rust版本: $(rustc --version)"
+          echo "Cargo版本: $(cargo --version)"
+          
+          # 添加Rust到PATH
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
