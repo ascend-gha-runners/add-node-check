@@ -8,8 +8,8 @@ FROM $REGISTRY/cann:$CANN_VERSION-$DEVICE_TYPE-$OS-$PYTHON_VERSION
 
 # Define environments
 ARG TARGETARCH
-ARG PIP_INDEX_URL="https://pypi.org/simple/"
-ARG APTMIRROR=""
+ARG PIP_INDEX_URL="https://repo.huaweicloud.com/repository/pypi/simple"
+ARG APTMIRROR="repo.huaweicloud.com"
 ARG PYTORCH_VERSION=2.8.0
 ARG TORCHVISION_VERSION=0.23.0
 ARG VLLM_TAG=v0.8.5
@@ -70,13 +70,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Install dependencies
 # TODO: install from pypi released memfabric
-RUN if [ "$TARGETARCH" = "amd64" ]; then \
-      pip install mf-adapter==1.0.0; \
-    elif [ "$TARGETARCH" = "arm64" ]; then \
-      pip install mf-adapter==1.0.0; \
-    else \
-      echo "Unsupported TARGETARCH: $TARGETARCH"; exit 1; \
-    fi
+RUN pip install mf-adapter==1.0.0
 
 RUN pip install setuptools-rust wheel build --no-cache-dir
 
