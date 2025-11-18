@@ -94,7 +94,7 @@ RUN . /etc/environment_new && \
 RUN pip install \
     --timeout 60 \
     --retries 3 \
-    "triton-ascend < 3.2.0rc" \
+    "triton-ascend" \
     --pre \
     --no-cache-dir
 
