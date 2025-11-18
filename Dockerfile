@@ -86,7 +86,7 @@ RUN git clone --depth 1 https://github.com/vllm-project/vllm.git --branch $VLLM_
 
 # Install torch PTA
 RUN . /etc/environment_new && \
-    pip install torch==$PYTORCH_VERSION torchvision==$TORCHVISION_VERSION --index-url https://download.pytorch.org/whl/cpu --no-cache-dir \
+    pip install torch==$PYTORCH_VERSION torchvision==$TORCHVISION_VERSION --no-cache-dir \
     && wget ${PTA_URL} && pip install $(basename ${PTA_URL}) --no-cache-dir \
     && python3 -m pip install --no-cache-dir attrs==24.2.0 numpy==1.26.4 scipy==1.13.1 decorator==5.1.1 psutil==6.0.0 pytest==8.3.2 pytest-xdist==3.6.1 pyyaml pybind11
 
