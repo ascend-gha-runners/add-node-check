@@ -75,9 +75,11 @@ RUN pip install mf-adapter==1.0.0
 RUN pip install setuptools-rust wheel build --no-cache-dir
 
 # install rustup from rustup.rs
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+RUN export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static \
+    && export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup \
+    && curl --proto '=https' --tlsv1.2 -sSf https://mirrors.ustc.edu.cn/rust-static/rustup/rustup-init.sh | sh -s -- -y \
     && rustc --version && cargo --version && protoc --version
-
+    
 # Install vLLM
 RUN git clone --depth 1 https://github.com/vllm-project/vllm.git --branch $VLLM_TAG && \
     (cd vllm && VLLM_TARGET_DEVICE="empty" pip install -v . --timeout 1000 --resume-retries 5 --no-cache-dir) && rm -rf vllm
