@@ -6,9 +6,6 @@ jobs:
   test:
     runs-on: linux-amd64-cpu-0
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
       - name: Install Rust with timing
         run: |
           echo "开始安装Rust..."
