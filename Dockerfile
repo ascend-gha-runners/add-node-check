@@ -85,9 +85,20 @@ RUN . /etc/environment_new && \
 
 RUN pip install setuptools-rust wheel build --no-cache-dir
 
-# install rustup from rustup.rs
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+# install rustup from rustup.rs with China mirror
+RUN RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static \
+    RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
     && rustc --version && cargo --version && protoc --version
+
+# Configure cargo to use China mirror for future cargo builds
+RUN mkdir -p ~/.cargo && \
+    echo '[source.crates-io]' >> ~/.cargo/config && \
+    echo 'replace-with = "ustc"' >> ~/.cargo/config && \
+    echo '[source.ustc]' >> ~/.cargo/config && \
+    echo 'registry = "git://mirrors.ustc.edu.cn/crates.io-index"' >> ~/.cargo/config && \
+    echo '[net]' >> ~/.cargo/config && \
+    echo 'git-fetch-with-cli = true' >> ~/.cargo/config
 
 # Install vLLM
 RUN git clone --depth 1 https://github.com/vllm-project/vllm.git --branch $VLLM_TAG && \
