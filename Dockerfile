@@ -2,7 +2,7 @@ ARG CANN_VERSION=8.3.rc1
 ARG OS=ubuntu22.04
 ARG DEVICE_TYPE=910b
 ARG PYTHON_VERSION=py3.11
-ARG REGISTRY=quay.io/ascend
+ARG REGISTRY=swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci
 
 FROM $REGISTRY/cann:$CANN_VERSION-$DEVICE_TYPE-$OS-$PYTHON_VERSION
 
