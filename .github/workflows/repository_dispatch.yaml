@@ -20,4 +20,4 @@ jobs:
           npu-smi info
       - name: sleep
         run: |
-          sleep 3600
+          sleep 60
