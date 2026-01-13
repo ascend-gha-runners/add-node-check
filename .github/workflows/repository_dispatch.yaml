@@ -18,6 +18,9 @@ jobs:
       - name: Show NPU info
         run: |
           npu-smi info
+      - name: echo
+        run: |
+          echo 1
       - name: sleep
         run: |
           sleep 60
