@@ -23,4 +23,4 @@ jobs:
           echo 1
       - name: sleep
         run: |
-          sleep 60
+          sleep 300
