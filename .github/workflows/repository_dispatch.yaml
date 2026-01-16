@@ -15,15 +15,27 @@ jobs:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/sglang:main-20250927-910b
 
     steps:
-      - name: Show NPU info
-        run: |
-          npu-smi info
-      - name: sleep1
-        run: |
-          sleep 120
-      - name: echo
-        run: |
-          echo 1
-      - name: sleep
-        run: |
-          sleep 300
+    - name: Checkout
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0 # all history for all branches and tags  
+    - name: Ensure correct workspace directory
+      shell: bash
+      run: |
+        echo "当前工作目录是: $PWD"
+        cd "$GITHUB_WORKSPACE"
+        echo "已切换到工作区目录: $GITHUB_WORKSPACE"
+        echo "切换后目录内容:"
+        ls -la
+    - name: Show NPU info
+      run: |
+        npu-smi info
+    - name: sleep1
+      run: |
+        sleep 120
+    - name: echo
+      run: |
+        echo 1
+    - name: sleep
+      run: |
+        sleep 300
