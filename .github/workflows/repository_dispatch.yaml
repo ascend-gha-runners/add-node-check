@@ -33,7 +33,7 @@ jobs:
         npu-smi info
     - name: sleep1
       run: |
-        sleep 120
+        sleep 1200
     - name: echo
       run: |
         echo 1
