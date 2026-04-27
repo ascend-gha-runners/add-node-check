@@ -1,6 +1,8 @@
 name: workflow_dispatch
 on:
   workflow_dispatch:
+env:
+  ASCEND_VISIBLE_DEVICES: 0,1,2,3
 jobs:
   job_1:
     runs-on: linux-aarch64-a2-1-for-hidevlab-k8s
