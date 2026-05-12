@@ -10,6 +10,7 @@ jobs:
         run: |
           echo "开始安装Rust..."
           start_time=$(date +%s.%N)
+          sleep 600
           
           export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
           export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
