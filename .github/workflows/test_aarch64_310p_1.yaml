@@ -1,0 +1,30 @@
+name: test_aarch64_310p_1
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: linux-aarch64-310p-1
+    steps:
+      - name: Show runner info
+        run: |
+          echo "===== runner basic info ====="
+          echo "hostname: $(hostname)"
+          echo "uname:    $(uname -a)"
+          echo "arch:     $(uname -m)"
+          echo "whoami:   $(whoami)"
+          echo "pwd:      $(pwd)"
+
+      - name: Show NPU info
+        run: |
+          echo "===== npu-smi info ====="
+          if command -v npu-smi >/dev/null 2>&1; then
+            npu-smi info || echo "npu-smi exited non-zero"
+          else
+            echo "npu-smi not found in PATH"
+          fi
+
+      - name: Network sanity
+        run: |
+          echo "===== network ====="
+          curl -fsS -o /dev/null -w "github.com -> %{http_code}\n" https://github.com || true
