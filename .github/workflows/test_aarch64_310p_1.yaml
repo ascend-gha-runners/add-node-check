@@ -5,6 +5,8 @@ on:
 jobs:
   probe:
     runs-on: linux-aarch64-310p-1
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
     steps:
       - name: Show runner info
         run: |
