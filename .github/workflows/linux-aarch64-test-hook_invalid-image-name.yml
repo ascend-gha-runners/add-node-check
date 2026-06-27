@@ -1,4 +1,4 @@
-name: linux-aarch64-test-hook-invalid-image-name
+name: linux-aarch64-test-hook_invalid-image-name
 on:
   workflow_dispatch:
 
@@ -6,7 +6,7 @@ jobs:
   probe:
     runs-on: linux-aarch64-test-hook
     container:
-      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py5.11
+      image: "not a valid image name!!!"
     steps:
       - name: Show runner info
         run: |
