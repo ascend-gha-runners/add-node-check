@@ -4,7 +4,7 @@ on:
 
 jobs:
   probe:
-    runs-on: linux-aarch64-test-hook
+    runs-on: linux-test-lwt
     container:
       image: "not a valid image name!!!"
     steps:
