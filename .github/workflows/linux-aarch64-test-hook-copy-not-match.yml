@@ -51,7 +51,7 @@ jobs:
       cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
     container:
-      image: https://hf-mirror.com/ascendai/cann:9.0.0-910b-ubuntu22.04-py3.11
+      image: hf-mirror.com/ascendai/cann:9.0.0-910b-ubuntu22.04-py3.11
       options: >-
         --shm-size 16g
       env:
