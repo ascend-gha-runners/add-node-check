@@ -1,0 +1,32 @@
+name: org-runner-demo
+
+# W2 organization-level pool demo.
+#   runner scale set : linux-aarch64-310p-2-orgdemo
+#   githubConfigUrl  : https://github.com/ascend-gha-runners  (organization)
+# The SAME label is used by every repository in the organization; no runner
+# object exists in this repository.  Jobs are held by arc-fedsched and placed
+# onto the Karmada members test1 / test2.
+on:
+  workflow_dispatch:
+
+jobs:
+  task:
+    name: task-${{ matrix.n }}
+    runs-on: linux-aarch64-310p-2-orgdemo
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2]
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
+    steps:
+      - name: Where am I
+        run: |
+          echo "repo=${GITHUB_REPOSITORY}"
+          echo "node=${NODE_NAME}"
+          echo "pod=${HOSTNAME}"
+          uname -m
+      - name: Check NPU
+        run: |
+          npu-smi info | head -12
+          sleep 60
