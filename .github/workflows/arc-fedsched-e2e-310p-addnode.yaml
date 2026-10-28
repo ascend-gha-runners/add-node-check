@@ -6,8 +6,8 @@ name: arc-fedsched e2e 310p add-node-check
 # opensourceways/arc-fedsched); jobs are scheduled by arc-fedsched onto the
 # Karmada members test1 / test2.
 #
-# Four parallel jobs, 2 cards each: enough to show where arc-fedsched places
-# them (placement: best-fit packs, placement: spread distributes).
+# Twelve parallel jobs, 2 cards each on 8-card nodes: two waves per member,
+# enough to watch both the placement split and the NPU FIFO queue.
 on:
   workflow_dispatch:
 
@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        n: [1, 2, 3, 4]
+        n: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
     steps:
@@ -26,8 +26,7 @@ jobs:
         run: |
           echo "node=${NODE_NAME}"
           echo "pod=${HOSTNAME}"
-          uname -m
       - name: Check NPU
         run: |
           npu-smi info | head -12
-          sleep 120
+          sleep 60
