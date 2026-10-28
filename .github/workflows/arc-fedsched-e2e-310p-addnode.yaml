@@ -14,13 +14,6 @@ jobs:
     runs-on: linux-aarch64-310p-2-addnode
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:9.2.0_20260928212200-310p-ubuntu22.04-py3.12
-      volumeMounts:
-        - name: driver
-          mountPath: /usr/local/Ascend/driver
-    volumes:
-      - name: driver
-        hostPath:
-          path: /usr/local/Ascend/driver
     steps:
       - name: Where am I
         run: |
@@ -37,13 +30,6 @@ jobs:
     runs-on: linux-aarch64-310p-2-addnode
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:9.2.0_20260928212200-310p-ubuntu22.04-py3.12
-      volumeMounts:
-        - name: driver
-          mountPath: /usr/local/Ascend/driver
-    volumes:
-      - name: driver
-        hostPath:
-          path: /usr/local/Ascend/driver
     steps:
       - name: Where am I
         run: |
