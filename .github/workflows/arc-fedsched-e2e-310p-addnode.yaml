@@ -1,0 +1,56 @@
+name: arc-fedsched e2e 310p add-node-check
+
+# Onboarding rehearsal for the ARC federation in ascend-ci-test-03.
+# The runner label linux-aarch64-310p-2-addnode is served by the ARC scale set
+# arc-runner-addnode-310p (manifests/arc-runner-addnode-310p in
+# opensourceways/arc-fedsched); jobs are scheduled by arc-fedsched onto the
+# Karmada members test1 / test2.
+on:
+  workflow_dispatch:
+
+jobs:
+  task-1:
+    name: task-1
+    runs-on: linux-aarch64-310p-2-addnode
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:9.2.0_20260928212200-310p-ubuntu22.04-py3.12
+      volumeMounts:
+        - name: driver
+          mountPath: /usr/local/Ascend/driver
+    volumes:
+      - name: driver
+        hostPath:
+          path: /usr/local/Ascend/driver
+    steps:
+      - name: Where am I
+        run: |
+          echo "node=${NODE_NAME}"
+          echo "pod=${HOSTNAME}"
+          uname -a
+      - name: Check NPU
+        run: |
+          npu-smi info
+          sleep 60
+
+  task-2:
+    name: task-2
+    runs-on: linux-aarch64-310p-2-addnode
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:9.2.0_20260928212200-310p-ubuntu22.04-py3.12
+      volumeMounts:
+        - name: driver
+          mountPath: /usr/local/Ascend/driver
+    volumes:
+      - name: driver
+        hostPath:
+          path: /usr/local/Ascend/driver
+    steps:
+      - name: Where am I
+        run: |
+          echo "node=${NODE_NAME}"
+          echo "pod=${HOSTNAME}"
+          uname -a
+      - name: Check NPU
+        run: |
+          npu-smi info
+          sleep 60
