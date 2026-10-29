@@ -1,0 +1,23 @@
+name: arc-fedsched taint preload 6x2
+
+# Taint drill, step 1: occupy cards so the 6-card job cannot fit.
+# Six 2-card jobs fill test1 (4 jobs = 8 cards) and leave test2 at 4/8.
+on:
+  workflow_dispatch:
+
+jobs:
+  preload:
+    name: preload-${{ matrix.n }}
+    runs-on: linux-aarch64-310p-2-ascend-gha-runners
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2, 3, 4, 5, 6]
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
+    steps:
+      - name: Hold two cards
+        run: |
+          echo "node=${NODE_NAME} pod=${HOSTNAME}"
+          npu-smi info | grep -E '^\| [0-9]+' | head -8
+          sleep 300
