@@ -4,6 +4,9 @@ name: arc-fedsched e2e org-level 310p
 # the ascend-gha-runners organization) created by ascend-runner-onboarding in
 # federation mode.  Runner label: linux-aarch64-310p-2-ascend-gha-runners
 # arc-fedsched places the runner pods on the Karmada members test1 / test2.
+#
+# Twelve parallel jobs, 2 cards each: 24 cards against 8 cards per member, so
+# only 8 run at once and the rest queue behind the FIFO reservation.
 on:
   workflow_dispatch:
 
@@ -14,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        n: [1, 2, 3, 4]
+        n: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     container:
       image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
     steps:
@@ -24,5 +27,6 @@ jobs:
           echo "pod=${HOSTNAME}"
       - name: Check NPU
         run: |
-          npu-smi info | head -12
-          sleep 120
+          npu-smi info -l | head -5
+          npu-smi info | grep -E '^\| [0-9]+' | head -8
+          sleep 180
