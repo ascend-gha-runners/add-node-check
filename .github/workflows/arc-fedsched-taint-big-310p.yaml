@@ -1,0 +1,20 @@
+name: arc-fedsched taint big 1x6
+
+# Taint drill, step 2: a 6-card job.  With 6 >= 0.5 x 8 (minHeadFraction) the
+# fifo-reserve-node policy may pick a node to drain, write the NoSchedule taint
+# and release it once the node is empty.
+on:
+  workflow_dispatch:
+
+jobs:
+  big:
+    name: big-6cards
+    runs-on: linux-aarch64-310p-6-lab
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
+    steps:
+      - name: Six cards
+        run: |
+          echo "node=${NODE_NAME} pod=${HOSTNAME}"
+          npu-smi info | grep -E '^\| [0-9]+' | head -12
+          sleep 180
