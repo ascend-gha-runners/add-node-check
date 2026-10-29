@@ -4,10 +4,11 @@ name: org-runner-demo
 #   runner scale set : linux-aarch64-310p-2-orgdemo
 #   githubConfigUrl  : https://github.com/ascend-gha-runners  (organization)
 # The SAME label is used by every repository in the organization; no runner
-# object exists in this repository.  Jobs are held by arc-fedsched and placed
-# onto the Karmada members test1 / test2.
+# object exists in this repository.
 on:
   workflow_dispatch:
+  push:
+    branches: [karmada-orgdemo]
 
 jobs:
   task:
