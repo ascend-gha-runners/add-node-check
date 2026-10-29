@@ -1,0 +1,28 @@
+name: arc-fedsched e2e org-level 310p
+
+# Rehearsal for the organization-level ARC scale set (githubConfigUrl points at
+# the ascend-gha-runners organization) created by ascend-runner-onboarding in
+# federation mode.  Runner label: linux-aarch64-310p-2-ascend-gha-runners
+# arc-fedsched places the runner pods on the Karmada members test1 / test2.
+on:
+  workflow_dispatch:
+
+jobs:
+  task:
+    name: task-${{ matrix.n }}
+    runs-on: linux-aarch64-310p-2-ascend-gha-runners
+    strategy:
+      fail-fast: false
+      matrix:
+        n: [1, 2, 3, 4]
+    container:
+      image: swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann:8.2.rc1-910b-ubuntu22.04-py3.11
+    steps:
+      - name: Where am I
+        run: |
+          echo "node=${NODE_NAME}"
+          echo "pod=${HOSTNAME}"
+      - name: Check NPU
+        run: |
+          npu-smi info | head -12
+          sleep 120
