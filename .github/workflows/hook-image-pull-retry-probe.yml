@@ -1,0 +1,13 @@
+name: hook-image-pull-retry-probe
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: linux-test-lwt
+    container:
+      image: 192.0.2.1:5000/foo/bar:latest
+    steps:
+      - name: should-not-run
+        run: echo "image pulled"
